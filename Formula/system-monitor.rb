@@ -20,7 +20,8 @@ class SystemMonitor < Formula
   end
 
   def install
-    bin.install "system-monitor"
+    matched = Dir.glob("system-monitor*").first
+    bin.install matched => "system-monitor"
   end
 
   service do
