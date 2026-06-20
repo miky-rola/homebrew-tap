@@ -1,22 +1,22 @@
 class SystemMonitor < Formula
   desc "Lightweight cross-platform system monitoring tool with desktop notifications"
   homepage "https://github.com/miky-rola/system-monitor"
-  version "0.3.1"
+  version "0.4.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/miky-rola/system-monitor/releases/download/v0.3.1/system-monitor-macos-aarch64.tar.gz"
-      sha256 "3d2b4fea8e8ffcf1a121c9723ebdd26d7be319b160f8b7053be03f1fa0db8ca9"
+      url "https://github.com/miky-rola/system-monitor/releases/download/v0.4.0/system-monitor-macos-aarch64.tar.gz"
+      sha256 "e941c7be2a7e53421305ed2cd209135e9c45963a80787c3b5dab4cb618f2950d"
     else
-      url "https://github.com/miky-rola/system-monitor/releases/download/v0.3.1/system-monitor-macos-x86_64.tar.gz"
-      sha256 "e82874b290bc9279cf026ddbd8666ca3c09062a330983faa6acd6b2dd7ce45dd"
+      url "https://github.com/miky-rola/system-monitor/releases/download/v0.4.0/system-monitor-macos-x86_64.tar.gz"
+      sha256 "438ac92557addc493f6eb47a00a4943e56db61820cf0d5da16b35990f26aa0e9"
     end
   end
 
   on_linux do
-    url "https://github.com/miky-rola/system-monitor/releases/download/v0.3.1/system-monitor-linux-x86_64.tar.gz"
-    sha256 "58e5acc1ceec9cef6e1c6afce079270c7e4b1f2fa8c1a596994537da1acbe58b"
+    url "https://github.com/miky-rola/system-monitor/releases/download/v0.4.0/system-monitor-linux-x86_64.tar.gz"
+    sha256 "8228bcbbebe51bad89bbe93737962aec62a647d3a805185d88d9d814a85b96cb"
   end
 
   def install
