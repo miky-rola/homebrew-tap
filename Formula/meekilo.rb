@@ -1,5 +1,5 @@
 class Meekilo < Formula
-  desc "AI-controlled virtual camera for macOS (build-from-source, ad-hoc signed)"
+  desc "AI-controlled digital presence for video calls (build-from-source)"
   homepage "https://github.com/miky-rola/meekilo"
   license "MIT"
   head "https://github.com/miky-rola/meekilo.git", branch: "main"
@@ -23,6 +23,7 @@ class Meekilo < Formula
     cp "Meekilo/Meekilo.entitlements", "app.entitlements"
     cp "CameraExtension/CameraExtension.entitlements", "ext.entitlements"
     inreplace ["app.entitlements", "ext.entitlements"], "$(TeamIdentifierPrefix)", "", audit_result: false
+    system "/usr/libexec/PlistBuddy", "-c", "Delete :com.apple.developer.system-extension.install", "app.entitlements"
     system "plutil", "-replace", "CMIOExtension.CMIOExtensionMachServiceName",
            "-string", "com.sharpetwo.meekilo.cmio", ext/"Contents/Info.plist"
     system "codesign", "--force", "--sign", "-", "--entitlements", "ext.entitlements", ext
@@ -37,28 +38,22 @@ class Meekilo < Formula
     <<~EOS
       #!/bin/bash
       set -euo pipefail
-      if csrutil status | grep -q enabled; then
-          echo "SIP is enabled - the ad-hoc signed camera extension cannot load." >&2
-          echo "Boot to Recovery (hold power), open Terminal, run: csrutil disable" >&2
-          exit 1
-      fi
-      if ! systemextensionsctl developer 2>/dev/null | grep -q on; then
-          echo "Enabling system extension developer mode (password prompt)..."
-          sudo systemextensionsctl developer on
-      fi
-      sudo rm -rf /Applications/Meekilo.app
-      sudo cp -R "#{opt_prefix}/Meekilo.app" /Applications/
+      rm -rf /Applications/Meekilo.app
+      cp -R "#{opt_prefix}/Meekilo.app" /Applications/
       open /Applications/Meekilo.app
-      echo "Click 'Install AI Camera' in the menu bar, then approve in System Settings."
+      echo "meekilo is in your menu bar. To use it in Meet/Zoom/Teams:"
+      echo "  1. brew install --cask obs   (free, its virtual camera is signed)"
+      echo "  2. meekilo menu -> Start AI Camera (opens the preview window)"
+      echo "  3. OBS: Sources -> + -> macOS Screen Capture -> Window -> 'meekilo AI Camera'"
+      echo "  4. OBS: Start Virtual Camera, then pick 'OBS Virtual Camera' in your call app"
     EOS
   end
 
   def caveats
     <<~EOS
-      This build is ad-hoc signed (no Apple Developer account), so macOS loads
-      the camera extension only with SIP disabled and system-extension developer
-      mode on. Finish the install with:
+      No Apple Developer account or SIP changes needed. Finish with:
         meekilo-setup
+      Calls receive meekilo through OBS Virtual Camera (see meekilo-setup output).
     EOS
   end
 
