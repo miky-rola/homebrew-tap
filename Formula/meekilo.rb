@@ -38,7 +38,7 @@ class Meekilo < Formula
     <<~EOS
       #!/bin/bash
       set -euo pipefail
-      rm -rf /Applications/Meekilo.app
+      rm -rf /Applications/Meekilo.app 2>/dev/null || sudo rm -rf /Applications/Meekilo.app
       cp -R "#{opt_prefix}/Meekilo.app" /Applications/
       open /Applications/Meekilo.app
       echo "meekilo is in your menu bar. To use it in Meet/Zoom/Teams:"
