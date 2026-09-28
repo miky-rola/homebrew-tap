@@ -45,7 +45,7 @@ class Meekilo < Formula
       echo "  1. brew install --cask obs, open it once, allow Screen Recording"
       echo "  2. OBS: Tools -> WebSocket Server Settings -> enable, Show Connect Info, copy password"
       echo "  3. meekilo menu -> Settings -> OBS: paste password, Save, Test connection"
-      echo "  4. Every call: open OBS, then meekilo -> Start AI Camera (it sets up OBS and starts its virtual camera)"
+      echo "  4. Every call: meekilo -> Start AI Camera (it opens OBS, sets it up and starts its virtual camera)"
       echo "  5. Pick 'OBS Virtual Camera' in your call app"
     EOS
   end
