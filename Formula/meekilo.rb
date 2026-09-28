@@ -42,10 +42,11 @@ class Meekilo < Formula
       cp -R "#{opt_prefix}/Meekilo.app" /Applications/
       open /Applications/Meekilo.app
       echo "meekilo is in your menu bar. To use it in Meet/Zoom/Teams:"
-      echo "  1. brew install --cask obs   (free, its virtual camera is signed)"
-      echo "  2. meekilo menu -> Start AI Camera (opens the preview window)"
-      echo "  3. OBS: Sources -> + -> macOS Screen Capture -> Window -> 'meekilo AI Camera'"
-      echo "  4. OBS: Start Virtual Camera, then pick 'OBS Virtual Camera' in your call app"
+      echo "  1. brew install --cask obs, open it once, allow Screen Recording"
+      echo "  2. OBS: Tools -> WebSocket Server Settings -> enable, Show Connect Info, copy password"
+      echo "  3. meekilo menu -> Settings -> OBS: paste password, Save, Test connection"
+      echo "  4. Every call: open OBS, then meekilo -> Start AI Camera (it sets up OBS and starts its virtual camera)"
+      echo "  5. Pick 'OBS Virtual Camera' in your call app"
     EOS
   end
 
@@ -53,7 +54,8 @@ class Meekilo < Formula
     <<~EOS
       No Apple Developer account or SIP changes needed. Finish with:
         meekilo-setup
-      Calls receive meekilo through OBS Virtual Camera (see meekilo-setup output).
+      Calls receive meekilo through OBS Virtual Camera, which meekilo sets up and
+      starts automatically once its OBS WebSocket password is in Settings.
     EOS
   end
 
